@@ -14,6 +14,7 @@
 		<div id="position"></div>
 		<div id="log"></div>
 		<button class="button" id="reset">Reset</button>
+		<button class="button" id="give_up">Give up</button>
 
 		<div class="row" style="text-align:center;">
 			<div class="col-md-2"></div>
@@ -63,7 +64,7 @@ var direction = 'south';
 var pos = [0,0];
 $(document).ready(function(){
 	
-	bla = maze(10,10);
+	bla = maze(5,5);
 	get_around();
 	$(".dir_button").click(function(e){
 		e.preventDefault();
@@ -158,6 +159,11 @@ $(document).ready(function(){
 		pos[1] = 0;
 		direction = 'south';
 		get_around();
+		
+	});
+	$("#give_up").click(function(){
+		document.getElementById('out').innerHTML= display(bla); 
+		alert("You have given up. Please refresh the page to play again");
 		
 	});
 	function get_around(){
