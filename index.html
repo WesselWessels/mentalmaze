@@ -89,6 +89,15 @@
 			</div>
 			<div class="col-md-2"></div>
 		</div>	
+		<div class="row" id="map" style="text-align:center;">
+			<div class="col-md-2"></div>
+			<div class="col-md-8">
+				<canvas id="myCanvas" width="500" height="500"
+					style="border:1px solid #d3d3d3;">
+					Your browser does not support the HTML5 canvas tag.</canvas>
+			</div>
+			<div class="col-md-2"></div>
+		</div>
 
 	</body>
 </html>
@@ -101,10 +110,14 @@ var left_open = 0;
 var direction = 'south';
 var pos = [0,0];
 var maze_size = 5;
+var c;
+var ctx;
 $(document).ready(function(){
-	
+	c = document.getElementById("myCanvas");
+	ctx = c.getContext("2d");
 	bla = maze(5,5);
 	get_around();
+
 	$(document).keyup(function(e){
 		e.preventDefault();
 		console.log(e.keyCode);
@@ -224,9 +237,10 @@ $(document).ready(function(){
 			}
 		}
 		if(pos[0] == (bla.x - 1) && pos[1] ==(bla.y-1)){
-			document.getElementById('out').innerHTML= display(bla); 
+			drawMaze(bla);
+			//document.getElementById('out').innerHTML= display(bla); 
 			$("#controls").hide();
-			alert("YOU WIN!");
+			//alert("YOU WIN!");
 		}
 	}
 
@@ -262,13 +276,15 @@ $(document).ready(function(){
 		
 	});
 	$("#give_up").click(function(){
-		document.getElementById('out').innerHTML= display(bla); 
+		//document.getElementById('out').innerHTML= display(bla); 
+		drawMaze(bla);
 		$("#controls").hide();
 		//alert("You have given up. Please refresh the page to play again");
 		
 	});
 	$("#new_game").click(function(){
 		//document.getElementById('out').innerHTML("");
+		clear_maze();
 		$("#controls").show();
 		$("#out").html("");
 		$("#current_maze").text(maze_size+"x"+maze_size);
@@ -447,6 +463,44 @@ $(document).ready(function(){
 			text.push(line.join('')+'\r\n');
 		}
 		return text.join('');
+	}
+	function drawMaze(m){
+		
+		var interval = 500/m.x;
+		for(var j = 0; j <m.x; j++){
+			for(var i = 0; i< m.x; i++){
+				if(!m.horiz[j][i]){
+					ctx.moveTo(interval*(i+1),interval*(j+1));
+					ctx.lineTo(interval*(i+1),interval*(j));
+					ctx.stroke();
+
+				}
+
+				if(!m.verti[j][i]){
+					ctx.moveTo(interval*(i+1),interval*(j+1));
+					ctx.lineTo(interval*(i),interval*(j+1));
+					ctx.stroke();
+
+				}
+				console.log("x:"+j+"y:"+(i-1) );
+				// if(!m.verti[i-1][j]){
+				// ctx.moveTo(interval*j,interval*i);
+				// ctx.lineTo(interval,interval*i);
+				// ctx.stroke();
+				// }
+
+			}
+		}
+		ctx.fillStyle = "red";
+		ctx.fillRect(interval*0.1,interval*0.1,interval - interval*0.2,interval - interval*0.2);
+
+		ctx.fillStyle = "green";
+		ctx.fillRect(500-interval*0.9,500-interval*0.9,interval - interval*0.2,interval - interval*0.2);
+	}
+
+	function clear_maze(){
+		ctx.beginPath();
+		ctx.clearRect(0, 0, 500, 500);
 	}
 	
 	
