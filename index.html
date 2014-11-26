@@ -112,6 +112,7 @@ var pos = [0,0];
 var maze_size = 5;
 var c;
 var ctx;
+var visited;
 $(document).ready(function(){
 	c = document.getElementById("myCanvas");
 	ctx = c.getContext("2d");
@@ -221,6 +222,7 @@ $(document).ready(function(){
 	function press_forward(){
 		if(forward_open == 0){
 			//alert("You cannot walk into a wall!")
+			console.log("walking against wall");
 		}
 		else{
 			if(direction == 'south'){
@@ -235,7 +237,9 @@ $(document).ready(function(){
 			else if(direction == 'west'){
 				pos[0] = pos[0] -1;
 			}
+			visited[pos[0]][pos[1]] = true;
 		}
+		
 		if(pos[0] == (bla.x - 1) && pos[1] ==(bla.y-1)){
 			drawMaze(bla);
 			//document.getElementById('out').innerHTML= display(bla); 
@@ -388,6 +392,10 @@ $(document).ready(function(){
 	//credit: http://rosettacode.org/wiki/Maze_generation
 
 	function maze(x,y) {
+		visited = new Array(x);
+		for(var i = 0; i < visited.length; i++){
+			visited[i] = new Array(y);
+		}
 		var n=x*y-1;
 		if (n<0) {alert("illegal maze dimensions");return;}
 		var horiz =[]; for (var j= 0; j<x+1; j++) horiz[j]= [],
@@ -467,6 +475,7 @@ $(document).ready(function(){
 	function drawMaze(m){
 		
 		var interval = 500/m.x;
+		ctx.fillStyle = "grey";
 		for(var j = 0; j <m.x; j++){
 			for(var i = 0; i< m.x; i++){
 				if(!m.horiz[j][i]){
@@ -482,7 +491,11 @@ $(document).ready(function(){
 					ctx.stroke();
 
 				}
-				console.log("x:"+j+"y:"+(i-1) );
+
+				if(visited[j][i]){
+					ctx.fillRect(interval*j + interval*0.1,interval*i + interval*0.1, interval*0.8, interval*0.8);
+				}
+				//console.log("x:"+j+"y:"+(i-1) );
 				// if(!m.verti[i-1][j]){
 				// ctx.moveTo(interval*j,interval*i);
 				// ctx.lineTo(interval,interval*i);
@@ -491,11 +504,16 @@ $(document).ready(function(){
 
 			}
 		}
+		ctx.fillStyle = "blue";
+		ctx.fillRect(interval*pos[0] + interval*0.1,interval*pos[1] + interval*0.1, interval*0.8, interval*0.8);
+		
 		ctx.fillStyle = "red";
-		ctx.fillRect(interval*0.1,interval*0.1,interval - interval*0.2,interval - interval*0.2);
+		ctx.fillRect(interval*0.1,interval*0.1,interval*0.8,interval*0.8);
 
 		ctx.fillStyle = "green";
-		ctx.fillRect(500-interval*0.9,500-interval*0.9,interval - interval*0.2,interval - interval*0.2);
+		ctx.fillRect(500-interval*0.9,500-interval*0.9,interval*0.8,interval*0.8);
+
+		
 	}
 
 	function clear_maze(){
