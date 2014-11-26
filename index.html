@@ -14,26 +14,27 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
 	</head>
 	<body>
-		<div class="container-fluid">
+		<div class="container-fluid" style="text-align:center;">
 			<pre id="out"></pre>
 			
 			
 			<!-- <div id="direction"></div>
 			<div id="position"></div>
 			<div id="log"></div> -->
-			
+			<div><span id="current_maze">5x5</span>	</div>
 			<button class="button" id="reset">Reset</button>
 			<button class="button" id="give_up">Give up</button>
-			<span id="current_maze">5x5</span>
 			
-			<button type="button" class="btn btn-default" aria-label="Direction" style="float:right;">
-				<span id="distance"></span>
-				<span class="glyphicon glyphicon-arrow-up" aria-hidden="true" id="direction"></span>
+			<div>
+				<button type="button" class="btn btn-default" aria-label="Direction">
+					<span id="distance"></span>
+					<span class="glyphicon glyphicon-arrow-up" aria-hidden="true" id="direction"></span>
 
-			</button>
+				</button>
+			</div>
 		
 		</div>
-		<div class="container-fluid">
+		<div class="container-fluid" style="text-align:center;">
 			<div class="btn-group">
 				<button type="button" class="btn btn-default maze_size" id="four" value="4">4x4</button>
 				<button type="button" class="btn btn-default maze_size active" id="five" value="5">5x5</button>
@@ -506,7 +507,7 @@ $(document).ready(function(){
 		}
 		ctx.fillStyle = "blue";
 		ctx.fillRect(interval*pos[0] + interval*0.1,interval*pos[1] + interval*0.1, interval*0.8, interval*0.8);
-		
+
 		ctx.fillStyle = "red";
 		ctx.fillRect(interval*0.1,interval*0.1,interval*0.8,interval*0.8);
 
