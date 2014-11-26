@@ -2,9 +2,9 @@
 <html>
 	<head>
 		<title></title>
-		<script src="jquery-2.1.1.js"></script>
-		<link rel="stylesheet" href="bootstrap.css">
-		<script src="bootstrap.js"></script>
+		<script src="js/jquery-2.1.1.js"></script>
+		<link rel="stylesheet" href="css/bootstrap.css">
+		<script src="js/bootstrap.js"></script>
 	</head>
 	<body>
 		<div>
@@ -14,8 +14,15 @@
 		<!-- <div id="direction"></div>
 		<div id="position"></div>
 		<div id="log"></div> -->
+		
 		<button class="button" id="reset">Reset</button>
 		<button class="button" id="give_up">Give up</button>
+		<button type="button" class="btn btn-default" aria-label="Direction" style="float:right;">
+			<span id="distance"></span>
+			<span class="glyphicon glyphicon-arrow-up" aria-hidden="true" id="direction"></span>
+
+		</button>
+		
 		</div>
 		<div class="row" style="text-align:center;">
 			<div class="col-md-2"></div>
@@ -153,7 +160,24 @@ $(document).ready(function(){
 		// }
 
 		get_around();
-		$("#direction").text(direction);
+		//inverted directions maybe will fix
+		if(direction == 'north'){
+			$("#direction").removeClass();
+			$("#direction").addClass('glyphicon glyphicon-arrow-down');
+		}
+		else if(direction == 'south'){
+			$("#direction").removeClass();
+			$("#direction").addClass('glyphicon glyphicon-arrow-up');
+		}
+		else if(direction == 'west'){
+			$("#direction").removeClass();
+			$("#direction").addClass('glyphicon glyphicon-arrow-right');
+		}
+		else if(direction == 'east'){
+			$("#direction").removeClass();
+			$("#direction").addClass('glyphicon glyphicon-arrow-left');
+		}
+		//$("#direction").text(direction);
 		$("#position").text("x: "+pos[0]+ " y: "+pos[1]);
 
 	});
@@ -162,6 +186,8 @@ $(document).ready(function(){
 		pos[0] = 0;
 		pos[1] = 0;
 		direction = 'south';
+		$("#direction").removeClass();
+		$("#direction").addClass('glyphicon glyphicon-arrow-up');
 		get_around();
 		
 	});
@@ -172,6 +198,8 @@ $(document).ready(function(){
 	});
 	function get_around(){
 		
+		var distance = Math.sqrt(Math.pow((bla.x -pos[0] - 1),2) + Math.pow((bla.y -pos[1] - 1),2));
+		$("#distance").text(distance.toFixed(1));
 		
 		var south_open = 0;
 		for(var i = pos[1]; i <bla.y; i++){
@@ -256,6 +284,8 @@ $(document).ready(function(){
 		console.log('');
 		
 	}
+	//credit: http://rosettacode.org/wiki/Maze_generation
+
 	function maze(x,y) {
 		var n=x*y-1;
 		if (n<0) {alert("illegal maze dimensions");return;}
