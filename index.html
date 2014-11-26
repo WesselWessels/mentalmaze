@@ -5,28 +5,35 @@
 		<script src="js/jquery-2.1.1.js"></script>
 		<link rel="stylesheet" href="css/bootstrap.css">
 		<script src="js/bootstrap.js"></script>
+		<style type="text/css">
+			html, body {
+			    max-width: 100%;
+			    overflow-x: hidden;
+			}
+		</style>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
 	</head>
 	<body>
-		<div>
-		<pre id="out"></pre>
-		
-		
-		<!-- <div id="direction"></div>
-		<div id="position"></div>
-		<div id="log"></div> -->
-		
-		<button class="button" id="reset">Reset</button>
-		<button class="button" id="give_up">Give up</button>
-		<span id="current_maze">5x5</span>
-		
-		<button type="button" class="btn btn-default" aria-label="Direction" style="float:right;">
-			<span id="distance"></span>
-			<span class="glyphicon glyphicon-arrow-up" aria-hidden="true" id="direction"></span>
+		<div class="container-fluid">
+			<pre id="out"></pre>
+			
+			
+			<!-- <div id="direction"></div>
+			<div id="position"></div>
+			<div id="log"></div> -->
+			
+			<button class="button" id="reset">Reset</button>
+			<button class="button" id="give_up">Give up</button>
+			<span id="current_maze">5x5</span>
+			
+			<button type="button" class="btn btn-default" aria-label="Direction" style="float:right;">
+				<span id="distance"></span>
+				<span class="glyphicon glyphicon-arrow-up" aria-hidden="true" id="direction"></span>
 
-		</button>
+			</button>
 		
 		</div>
-		<div>
+		<div class="container-fluid">
 			<div class="btn-group">
 				<button type="button" class="btn btn-default maze_size" id="four" value="4">4x4</button>
 				<button type="button" class="btn btn-default maze_size active" id="five" value="5">5x5</button>
@@ -98,6 +105,26 @@ $(document).ready(function(){
 	
 	bla = maze(5,5);
 	get_around();
+	$(document).keyup(function(e){
+		e.preventDefault();
+		console.log(e.keyCode);
+		var direction_key = e.keyCode;
+		if(direction_key == '37'){
+			press_left();
+			get_around();
+			update_movement();
+		}
+		else if(direction_key == '39'){
+			press_right();
+			get_around();
+			update_movement();
+		}
+		else if(direction_key == '38'){
+			press_forward();
+			get_around();
+			update_movement();
+		}
+	});
 	$(".maze_size").click(function(){
 		$(".maze_size").removeClass('active');
 		$(this).addClass('active');
@@ -108,65 +135,13 @@ $(document).ready(function(){
 		e.preventDefault();
 		to = $(this).attr('value');
 		if(to == 'left'){
-			if(direction == 'south'){
-				//pos[0] = pos[0] +1;
-				direction = 'east';
-			}
-			else if(direction == 'north'){
-				//pos[0] = pos[0] -1;
-				direction = 'west';
-			}
-			else if(direction == 'east'){
-				//pos[1] = pos[1] -1;
-				direction = 'north';
-			}
-			else if(direction == 'west'){
-				//pos[1] = pos[1] +1;
-				direction = 'south';
-			}
+			press_left();
 		}
 		else if(to == 'right'){
-			if(direction == 'south'){
-				//pos[0] = pos[0] -1;
-				direction = 'west';
-			}
-			else if(direction == 'north'){
-				//pos[0] = pos[0] +1;
-				direction = 'east';
-			}
-			else if(direction == 'east'){
-				//pos[1] = pos[1] +1;
-				direction = 'south';
-			}
-			else if(direction == 'west'){
-				//pos[1] = pos[1] -1;
-				direction = 'north';
-			}
+			press_right();
 		}
 		else if(to == 'forward'){
-
-			if(forward_open == 0){
-				alert("You cannot walk into a wall!")
-			}
-			else{
-				if(direction == 'south'){
-					pos[1] = pos[1] +1;
-				}
-				else if(direction == 'north'){
-					pos[1] = pos[1] -1;
-				}
-				else if(direction == 'east'){
-					pos[0] = pos[0] +1;
-				}
-				else if(direction == 'west'){
-					pos[0] = pos[0] -1;
-				}
-			}
-			if(pos[0] == (bla.x - 1) && pos[1] ==(bla.y-1)){
-				document.getElementById('out').innerHTML= display(bla); 
-				$("#controls").hide();
-				alert("YOU WIN!");
-			}
+			press_forward();
 		}
 		// else if(to == 'back'){
 		// 	if(direction == 'south'){
@@ -188,6 +163,74 @@ $(document).ready(function(){
 		// }
 
 		get_around();
+		update_movement();
+
+	});
+
+	function press_left(){
+		if(direction == 'south'){
+			//pos[0] = pos[0] +1;
+			direction = 'east';
+		}
+		else if(direction == 'north'){
+			//pos[0] = pos[0] -1;
+			direction = 'west';
+		}
+		else if(direction == 'east'){
+			//pos[1] = pos[1] -1;
+			direction = 'north';
+		}
+		else if(direction == 'west'){
+			//pos[1] = pos[1] +1;
+			direction = 'south';
+		}
+	}
+
+	function press_right(){
+		if(direction == 'south'){
+			//pos[0] = pos[0] -1;
+			direction = 'west';
+		}
+		else if(direction == 'north'){
+			//pos[0] = pos[0] +1;
+			direction = 'east';
+		}
+		else if(direction == 'east'){
+			//pos[1] = pos[1] +1;
+			direction = 'south';
+		}
+		else if(direction == 'west'){
+			//pos[1] = pos[1] -1;
+			direction = 'north';
+		}
+	}
+
+	function press_forward(){
+		if(forward_open == 0){
+			//alert("You cannot walk into a wall!")
+		}
+		else{
+			if(direction == 'south'){
+				pos[1] = pos[1] +1;
+			}
+			else if(direction == 'north'){
+				pos[1] = pos[1] -1;
+			}
+			else if(direction == 'east'){
+				pos[0] = pos[0] +1;
+			}
+			else if(direction == 'west'){
+				pos[0] = pos[0] -1;
+			}
+		}
+		if(pos[0] == (bla.x - 1) && pos[1] ==(bla.y-1)){
+			document.getElementById('out').innerHTML= display(bla); 
+			$("#controls").hide();
+			alert("YOU WIN!");
+		}
+	}
+
+	function update_movement(){
 		//inverted directions maybe will fix
 		if(direction == 'north'){
 			$("#direction").removeClass();
@@ -207,8 +250,7 @@ $(document).ready(function(){
 		}
 		//$("#direction").text(direction);
 		$("#position").text("x: "+pos[0]+ " y: "+pos[1]);
-
-	});
+	}
 
 	$("#reset").click(function(){
 		pos[0] = 0;
