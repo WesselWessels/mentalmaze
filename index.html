@@ -17,12 +17,32 @@
 		
 		<button class="button" id="reset">Reset</button>
 		<button class="button" id="give_up">Give up</button>
+		<span id="current_maze">5x5</span>
+		
 		<button type="button" class="btn btn-default" aria-label="Direction" style="float:right;">
 			<span id="distance"></span>
 			<span class="glyphicon glyphicon-arrow-up" aria-hidden="true" id="direction"></span>
 
 		</button>
 		
+		</div>
+		<div>
+			<div class="btn-group">
+				<button type="button" class="btn btn-default maze_size" id="four" value="4">4x4</button>
+				<button type="button" class="btn btn-default maze_size active" id="five" value="5">5x5</button>
+				<button type="button" class="btn btn-default maze_size" id="six" value="6">6x6</button>
+				<button type="button" class="btn btn-default maze_size" id="seven" value="7">7x7</button>
+				<button type="button" class="btn btn-default maze_size" id="eight" value="8">8x8</button>
+				<button type="button" class="btn btn-default maze_size" id="nine" value="9">9x9</button>
+				<button type="button" class="btn btn-default maze_size" id="ten" value="10">10x10</button>		
+				<button type="button" class="btn btn-default maze_size" id="fifteen" value="15">15x15</button>		
+				<button type="button" class="btn btn-default maze_size" id="twenty" value="20">20x20</button>
+				<button type="button" class="btn btn-default maze_size" id="fifty" value="50">50x50</button>		
+
+			</div>
+			<div>
+				<button class="btn btn-danger" id="new_game">New Game</button>
+			</div>
 		</div>
 		<div class="row" style="text-align:center;">
 			<div class="col-md-2"></div>
@@ -73,10 +93,17 @@ var right_open = 0;
 var left_open = 0;
 var direction = 'south';
 var pos = [0,0];
+var maze_size = 5;
 $(document).ready(function(){
 	
 	bla = maze(5,5);
 	get_around();
+	$(".maze_size").click(function(){
+		$(".maze_size").removeClass('active');
+		$(this).addClass('active');
+		maze_size = Number($(this).attr('value'));
+		console.log(maze_size);
+	});
 	$(".dir_button").click(function(e){
 		e.preventDefault();
 		to = $(this).attr('value');
@@ -193,8 +220,21 @@ $(document).ready(function(){
 	});
 	$("#give_up").click(function(){
 		document.getElementById('out').innerHTML= display(bla); 
-		alert("You have given up. Please refresh the page to play again");
+		//alert("You have given up. Please refresh the page to play again");
 		
+	});
+	$("#new_game").click(function(){
+		//document.getElementById('out').innerHTML("");
+		$("#out").html("");
+		$("#current_maze").text(maze_size+"x"+maze_size);
+		bla = maze(maze_size, maze_size);
+
+		pos[0] = 0;
+		pos[1] = 0;
+		direction = 'south';
+		$("#direction").removeClass();
+		$("#direction").addClass('glyphicon glyphicon-arrow-up');
+		get_around();
 	});
 	function get_around(){
 		
@@ -317,6 +357,20 @@ $(document).ready(function(){
 				path.push(here = next);
 			} else 
 				here = path.pop();
+		}
+		for(var i = 0; i <horiz.length; i++){
+			for(var j = 0; j < horiz.length; j++){
+				if(!horiz[i][j]){
+					horiz[i][j] = false;
+				}
+			}
+		}
+		for(var i = 0; i <verti.length; i++){
+			for(var j = 0; j < verti.length; j++){
+				if(!verti[i][j]){
+					verti[i][j] = false;
+				}
+			}
 		}
 		return {x: x, y: y, horiz: horiz, verti: verti};
 	}
