@@ -92,13 +92,11 @@
 			<div class="col-md-2"></div>
 		</div>	
 		<div class="row" id="map" style="text-align:center;">
-			<div class="col-md-2"></div>
-			<div class="col-md-8">
+			<div class="col-md-12">
 				<canvas id="myCanvas" width="500" height="500"
 					style="border:1px solid #d3d3d3;">
 					Your browser does not support the HTML5 canvas tag.</canvas>
 			</div>
-			<div class="col-md-2"></div>
 		</div>
 
 	</body>
@@ -116,6 +114,9 @@ var c;
 var ctx;
 var visited;
 var canvas_size = window.innerWidth/3;
+if(window.innerWidth <500){
+	canvas_size = window.innerWidth;
+}
 $(document).ready(function(){
 	c = document.getElementById("myCanvas");
 	ctx = c.getContext("2d");
@@ -519,6 +520,9 @@ $(document).ready(function(){
 	}
 	function drawMaze(m){
 		 canvas_size = window.innerWidth/3;
+		 if(window.innerWidth <500){
+			canvas_size = window.innerWidth;
+		}
 		 ctx.canvas.width  =  canvas_size;
  		 ctx.canvas.height = canvas_size;
 		var interval = canvas_size/m.x;
