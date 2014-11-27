@@ -121,24 +121,30 @@ $(document).ready(function(){
 	bla = maze(5,5);
 	get_around();
 
-	$(document).keyup(function(e){
-		e.preventDefault();
+	$(document).keydown(function(e){
+		
 		console.log(e.keyCode);
 		var direction_key = e.keyCode;
 		if(direction_key == '37'){
 			press_left();
 			get_around();
 			update_movement();
+			e.preventDefault();
 		}
 		else if(direction_key == '39'){
 			press_right();
 			get_around();
 			update_movement();
+			e.preventDefault();
 		}
 		else if(direction_key == '38'){
 			press_forward();
 			get_around();
 			update_movement();
+			e.preventDefault();
+		}
+		else if(direction_key == '40'){
+			e.preventDefault();
 		}
 	});
 	$(".maze_size").click(function(){
