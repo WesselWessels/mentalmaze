@@ -13,7 +13,7 @@ The only information you have is the number of blocks open next to you.
 
 If the numbers are
 
-[ ][3][3]
+[ ][3][3]<br>
 [1][ ][0]
 [ ][0][ ]
 
