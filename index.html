@@ -21,7 +21,10 @@
 			<!-- <div id="direction"></div>
 			<div id="position"></div>
 			<div id="log"></div> -->
-			<div><span id="current_maze">5x5</span>	</div>
+			<!-- <div><span id="current_maze">5x5</span>	</div> -->
+			<div>
+				<button class="btn btn-danger" id="new_game">New Game</button>
+			</div>
 			<button class="button" id="reset">Reset</button>
 			<button class="button" id="give_up">Give up</button>
 			
@@ -48,9 +51,7 @@
 				<button type="button" class="btn btn-default maze_size" id="fifty" value="50">50x50</button>		
 
 			</div>
-			<div>
-				<button class="btn btn-danger" id="new_game">New Game</button>
-			</div>
+			
 		</div>
 		<div class="row" id="controls" style="text-align:center;">
 			<div class="col-md-2"></div>
@@ -144,6 +145,18 @@ $(document).ready(function(){
 		$(".maze_size").removeClass('active');
 		$(this).addClass('active');
 		maze_size = Number($(this).attr('value'));
+		clear_maze();
+		$("#controls").show();
+		$("#out").html("");
+		$("#current_maze").text(maze_size+"x"+maze_size);
+		bla = maze(maze_size, maze_size);
+
+		pos[0] = maze_size-1;
+		pos[1] = maze_size-1;
+		direction = 'north';
+		$("#direction").removeClass();
+		$("#direction").addClass('glyphicon glyphicon-arrow-up');
+		get_around();
 		console.log(maze_size);
 	});
 	$(".dir_button").click(function(e){
