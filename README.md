@@ -5,6 +5,9 @@ mental maze
 
 mentalmaze is a browser puzzle game where you must try and solve a maze in your head. 
 
+You can play it here:
+http://wesselwessels.github.io/mentalmaze
+
 To visualise it, imagine you are starting in the bottom right corner of the maze and you face upward. 
 
 Your goal is to reach the top left corner of the maze to escape it.
