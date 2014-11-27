@@ -108,8 +108,8 @@ var back_open;
 var forward_open = 0;
 var right_open = 0;
 var left_open = 0;
-var direction = 'south';
-var pos = [0,0];
+var direction = 'north';
+var pos = [4,4];
 var maze_size = 5;
 var c;
 var ctx;
@@ -241,7 +241,7 @@ $(document).ready(function(){
 			visited[pos[0]][pos[1]] = true;
 		}
 		
-		if(pos[0] == (bla.x - 1) && pos[1] ==(bla.y-1)){
+		if(pos[0] == 0 && pos[1] ==0){
 			drawMaze(bla);
 			//document.getElementById('out').innerHTML= display(bla); 
 			$("#controls").hide();
@@ -253,28 +253,28 @@ $(document).ready(function(){
 		//inverted directions maybe will fix
 		if(direction == 'north'){
 			$("#direction").removeClass();
-			$("#direction").addClass('glyphicon glyphicon-arrow-down');
+			$("#direction").addClass('glyphicon glyphicon-arrow-up');
 		}
 		else if(direction == 'south'){
 			$("#direction").removeClass();
-			$("#direction").addClass('glyphicon glyphicon-arrow-up');
+			$("#direction").addClass('glyphicon glyphicon-arrow-down');
 		}
 		else if(direction == 'west'){
 			$("#direction").removeClass();
-			$("#direction").addClass('glyphicon glyphicon-arrow-right');
+			$("#direction").addClass('glyphicon glyphicon-arrow-left');
 		}
 		else if(direction == 'east'){
 			$("#direction").removeClass();
-			$("#direction").addClass('glyphicon glyphicon-arrow-left');
+			$("#direction").addClass('glyphicon glyphicon-arrow-right');
 		}
 		//$("#direction").text(direction);
 		$("#position").text("x: "+pos[0]+ " y: "+pos[1]);
 	}
 
 	$("#reset").click(function(){
-		pos[0] = 0;
-		pos[1] = 0;
-		direction = 'south';
+		pos[0] = bla.x - 1;
+		pos[1] = bla.y -1;
+		direction = 'north';
 		$("#direction").removeClass();
 		$("#direction").addClass('glyphicon glyphicon-arrow-up');
 		get_around();
@@ -295,16 +295,16 @@ $(document).ready(function(){
 		$("#current_maze").text(maze_size+"x"+maze_size);
 		bla = maze(maze_size, maze_size);
 
-		pos[0] = 0;
-		pos[1] = 0;
-		direction = 'south';
+		pos[0] = maze_size-1;
+		pos[1] = maze_size-1;
+		direction = 'north';
 		$("#direction").removeClass();
 		$("#direction").addClass('glyphicon glyphicon-arrow-up');
 		get_around();
 	});
 	function get_around(){
 		
-		var distance = Math.sqrt(Math.pow((bla.x -pos[0] - 1),2) + Math.pow((bla.y -pos[1] - 1),2));
+		var distance = Math.sqrt(Math.pow((pos[0]),2) + Math.pow((pos[1]),2));
 		$("#distance").text(distance.toFixed(1));
 		
 		var south_open = 0;
@@ -508,10 +508,10 @@ $(document).ready(function(){
 		ctx.fillStyle = "blue";
 		ctx.fillRect(interval*pos[0] + interval*0.1,interval*pos[1] + interval*0.1, interval*0.8, interval*0.8);
 
-		ctx.fillStyle = "red";
+		ctx.fillStyle = "green";
 		ctx.fillRect(interval*0.1,interval*0.1,interval*0.8,interval*0.8);
 
-		ctx.fillStyle = "green";
+		ctx.fillStyle = "red";
 		ctx.fillRect(500-interval*0.9,500-interval*0.9,interval*0.8,interval*0.8);
 
 		
