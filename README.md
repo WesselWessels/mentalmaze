@@ -22,8 +22,8 @@ Behind you and to your right is a wall.
 
 If you turn left, you would rotate to the left and would get:
 
-#1#
-0#3
-#0#
+[ ][1][ ]<br>
+[0][ ][3]<br>
+[ ][0][ ]<br>
 
 By pressing the forward key or Move button, you would move one block forward and get new information about the block you are in.
