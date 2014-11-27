@@ -13,9 +13,9 @@ The only information you have is the number of blocks open next to you.
 
 If the numbers are
 
- 3
-1 0
- 0
+[ ][3][3]
+[1][ ][0]
+[ ][0][ ]
 
 it means there are 3 blocks open in front of you and 1 block open on the left. 
 Behind you and to your right is a wall.
