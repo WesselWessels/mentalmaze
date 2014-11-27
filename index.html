@@ -406,6 +406,28 @@ $(document).ready(function(){
 	//credit: http://rosettacode.org/wiki/Maze_generation
 
 	function maze(x,y) {
+		var interval = 500/x;
+		// ctx.fillStyle = "blue";
+		// ctx.fillRect(interval*pos[0] + interval*0.1,interval*pos[1] + interval*0.1, interval*0.8, interval*0.8);
+
+		ctx.fillStyle = "green";
+		ctx.fillRect(interval*0.1,interval*0.1,interval*0.8,interval*0.8);
+
+		ctx.fillStyle = "red";
+		ctx.fillRect(500-interval*0.9,500-interval*0.9,interval*0.8,interval*0.8);
+
+		//ctx.fillStyle = "black";
+		ctx.moveTo(500 - interval*(0.5),500 - interval*(0.8));
+		ctx.lineTo(500 - interval*(0.5),500 - interval*(0.2));
+		ctx.stroke();
+
+		ctx.moveTo(500 - interval*(0.5),500 - interval*(0.8));
+		ctx.lineTo(500 - interval*(0.67),500 - interval*(0.5));
+		ctx.stroke();
+
+		ctx.moveTo(500 - interval*(0.5),500 - interval*(0.8));
+		ctx.lineTo(500 - interval*(0.33),500 - interval*(0.5));
+		ctx.stroke();
 		visited = new Array(x);
 		for(var i = 0; i < visited.length; i++){
 			visited[i] = new Array(y);
@@ -527,6 +549,18 @@ $(document).ready(function(){
 		ctx.fillStyle = "red";
 		ctx.fillRect(500-interval*0.9,500-interval*0.9,interval*0.8,interval*0.8);
 
+		//ctx.fillStyle = "black";
+		// ctx.moveTo(500 - interval*(0.5),500 - interval*(0.8));
+		// ctx.lineTo(500 - interval*(0.5),500 - interval*(0.2));
+		// ctx.stroke();
+
+		// ctx.moveTo(500 - interval*(0.5),500 - interval*(0.8));
+		// ctx.lineTo(500 - interval*(0.67),500 - interval*(0.5));
+		// ctx.stroke();
+
+		// ctx.moveTo(500 - interval*(0.5),500 - interval*(0.8));
+		// ctx.lineTo(500 - interval*(0.33),500 - interval*(0.5));
+		// ctx.stroke();
 		
 	}
 
