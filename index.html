@@ -115,9 +115,12 @@ var maze_size = 5;
 var c;
 var ctx;
 var visited;
+var canvas_size = window.innerWidth/2;
 $(document).ready(function(){
 	c = document.getElementById("myCanvas");
 	ctx = c.getContext("2d");
+	ctx.canvas.width  =  canvas_size;
+ 	ctx.canvas.height = canvas_size;
 	bla = maze(5,5);
 	get_around();
 
@@ -412,7 +415,7 @@ $(document).ready(function(){
 	//credit: http://rosettacode.org/wiki/Maze_generation
 
 	function maze(x,y) {
-		var interval = 500/x;
+		var interval = canvas_size/x;
 		// ctx.fillStyle = "blue";
 		// ctx.fillRect(interval*pos[0] + interval*0.1,interval*pos[1] + interval*0.1, interval*0.8, interval*0.8);
 
@@ -420,19 +423,19 @@ $(document).ready(function(){
 		ctx.fillRect(interval*0.1,interval*0.1,interval*0.8,interval*0.8);
 
 		ctx.fillStyle = "red";
-		ctx.fillRect(500-interval*0.9,500-interval*0.9,interval*0.8,interval*0.8);
+		ctx.fillRect(canvas_size-interval*0.9,canvas_size-interval*0.9,interval*0.8,interval*0.8);
 
 		//ctx.fillStyle = "black";
-		ctx.moveTo(500 - interval*(0.5),500 - interval*(0.8));
-		ctx.lineTo(500 - interval*(0.5),500 - interval*(0.2));
+		ctx.moveTo(canvas_size - interval*(0.5),canvas_size - interval*(0.8));
+		ctx.lineTo(canvas_size - interval*(0.5),canvas_size - interval*(0.2));
 		ctx.stroke();
 
-		ctx.moveTo(500 - interval*(0.5),500 - interval*(0.8));
-		ctx.lineTo(500 - interval*(0.67),500 - interval*(0.5));
+		ctx.moveTo(canvas_size - interval*(0.5),canvas_size - interval*(0.8));
+		ctx.lineTo(canvas_size - interval*(0.67),canvas_size - interval*(0.5));
 		ctx.stroke();
 
-		ctx.moveTo(500 - interval*(0.5),500 - interval*(0.8));
-		ctx.lineTo(500 - interval*(0.33),500 - interval*(0.5));
+		ctx.moveTo(canvas_size - interval*(0.5),canvas_size - interval*(0.8));
+		ctx.lineTo(canvas_size - interval*(0.33),canvas_size - interval*(0.5));
 		ctx.stroke();
 		visited = new Array(x);
 		for(var i = 0; i < visited.length; i++){
@@ -515,8 +518,10 @@ $(document).ready(function(){
 		return text.join('');
 	}
 	function drawMaze(m){
-		
-		var interval = 500/m.x;
+		 canvas_size = window.innerWidth/2;
+		 ctx.canvas.width  =  canvas_size;
+ 		 ctx.canvas.height = canvas_size;
+		var interval = canvas_size/m.x;
 		ctx.fillStyle = "grey";
 		for(var j = 0; j <m.x; j++){
 			for(var i = 0; i< m.x; i++){
@@ -553,7 +558,7 @@ $(document).ready(function(){
 		ctx.fillRect(interval*0.1,interval*0.1,interval*0.8,interval*0.8);
 
 		ctx.fillStyle = "red";
-		ctx.fillRect(500-interval*0.9,500-interval*0.9,interval*0.8,interval*0.8);
+		ctx.fillRect(canvas_size-interval*0.9,canvas_size-interval*0.9,interval*0.8,interval*0.8);
 
 		//ctx.fillStyle = "black";
 		// ctx.moveTo(500 - interval*(0.5),500 - interval*(0.8));
@@ -572,7 +577,7 @@ $(document).ready(function(){
 
 	function clear_maze(){
 		ctx.beginPath();
-		ctx.clearRect(0, 0, 500, 500);
+		ctx.clearRect(0, 0, canvas_size, canvas_size);
 	}
 	
 	
