@@ -28,6 +28,22 @@
 			<button class="button" id="reset">Reset</button>
 			<button class="button" id="give_up">Give up</button>
 			
+			
+		
+		</div>
+		<div class="container-fluid" style="text-align:center;">
+			<div class="btn-group">
+				<button type="button" class="btn btn-success maze_size" id="four" value="4">4x4</button>
+				<button type="button" class="btn btn-success maze_size active" id="five" value="5">5x5</button>
+				<button type="button" class="btn btn-success maze_size" id="six" value="6">6x6</button>
+				<button type="button" class="btn btn-warning maze_size" id="seven" value="7">7x7</button>
+				<button type="button" class="btn btn-warning maze_size" id="eight" value="8">8x8</button>
+				<button type="button" class="btn btn-warning maze_size" id="nine" value="9">9x9</button>
+				<button type="button" class="btn btn-warning maze_size" id="ten" value="10">10x10</button>		
+				<button type="button" class="btn btn-danger maze_size" id="fifteen" value="15">15x15</button>		
+				<button type="button" class="btn btn-danger maze_size" id="twenty" value="20">20x20</button>
+				<button type="button" class="btn btn-danger maze_size" id="fifty" value="50">50x50</button>		
+			</div>
 			<div>
 				<button type="button" class="btn btn-default" aria-label="Direction">
 					<span id="distance"></span>
@@ -35,23 +51,6 @@
 
 				</button>
 			</div>
-		
-		</div>
-		<div class="container-fluid" style="text-align:center;">
-			<div class="btn-group">
-				<button type="button" class="btn btn-default maze_size" id="four" value="4">4x4</button>
-				<button type="button" class="btn btn-default maze_size active" id="five" value="5">5x5</button>
-				<button type="button" class="btn btn-default maze_size" id="six" value="6">6x6</button>
-				<button type="button" class="btn btn-default maze_size" id="seven" value="7">7x7</button>
-				<button type="button" class="btn btn-default maze_size" id="eight" value="8">8x8</button>
-				<button type="button" class="btn btn-default maze_size" id="nine" value="9">9x9</button>
-				<button type="button" class="btn btn-default maze_size" id="ten" value="10">10x10</button>		
-				<button type="button" class="btn btn-default maze_size" id="fifteen" value="15">15x15</button>		
-				<button type="button" class="btn btn-default maze_size" id="twenty" value="20">20x20</button>
-				<button type="button" class="btn btn-default maze_size" id="fifty" value="50">50x50</button>		
-
-			</div>
-			
 		</div>
 		<div class="row" id="controls" style="text-align:center;">
 			<div class="col-md-2"></div>
@@ -70,9 +69,9 @@
 					</div>
 					<div class="col-md-4">
 						<span id="left_open"></span>
-						<button class="dir_button btn" value="left">Left</button>
-						<button class="dir_button btn" value="forward" id="forward">Forward</button>
-						<button class="dir_button btn" value="right">Right</button>
+						<button class="dir_button btn btn-primary" value="left">Rotate Left</button>
+						<button class="dir_button btn" value="forward" id="forward">Move</button>
+						<button class="dir_button btn btn-primary" value="right">Rotate Right</button>
 						<span id="right_open"></span>
 
 					</div>
@@ -80,7 +79,8 @@
 						
 					</div>
 
-				</div><div class ="row">
+				</div>
+				<div class ="row">
 					<div class="col-md-4"></div>
 					<div class="col-md-4" id="back_open">
 						hello
@@ -97,6 +97,24 @@
 					style="border:1px solid #d3d3d3;">
 					Your browser does not support the HTML5 canvas tag.</canvas>
 			</div>
+		</div>
+
+		<div class="container-fluid" style="text-align:center;">
+			
+			<div class ="row">
+					<div class="col-md-4"></div>
+					<div class="col-md-4">
+						<h3>Instructions</h3>
+						Clearer instructions will follow soon. Long story short, you are in a mental maze.
+						You start on the red square and must reach the green square. 
+						The numbers tell you how many blocks are open in all 4 directions. 
+						You must keep track of where you are and where you are facing. <br>
+						GOOD LUCK!
+					</div>
+					<div class="col-md-4"></div>
+
+				</div>
+
 		</div>
 
 	</body>
