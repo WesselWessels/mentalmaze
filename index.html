@@ -439,6 +439,14 @@ $(document).ready(function(){
 		ctx.lineTo(canvas_size - interval*(0.33),canvas_size - interval*(0.5));
 		ctx.stroke();
 		visited = new Array(x);
+
+		ctx.fillStyle = "grey";
+		for(var j = 0; j <y; j++){
+			for(var i = 0; i< x; i++){
+				ctx.fillRect(interval*(i+1),interval*(j+1),interval/20 + 1,interval/20 +1);
+			}
+		}
+		
 		for(var i = 0; i < visited.length; i++){
 			visited[i] = new Array(y);
 		}
@@ -527,7 +535,7 @@ $(document).ready(function(){
  		 ctx.canvas.height = canvas_size;
 		var interval = canvas_size/m.x;
 		ctx.fillStyle = "grey";
-		for(var j = 0; j <m.x; j++){
+		for(var j = 0; j <m.y; j++){
 			for(var i = 0; i< m.x; i++){
 				if(!m.horiz[j][i]){
 					ctx.moveTo(interval*(i+1),interval*(j+1));
