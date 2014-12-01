@@ -174,7 +174,7 @@ $(document).ready(function(){
 		$(this).addClass('active');
 		maze_size = Number($(this).attr('value'));
 		clear_maze();
-		$("#controls").show();
+		$("#controls").css('visibility', 'visible');
 		$("#out").html("");
 		$("#current_maze").text(maze_size+"x"+maze_size);
 		bla = maze(maze_size, maze_size);
@@ -285,7 +285,7 @@ $(document).ready(function(){
 		if(pos[0] == 0 && pos[1] ==0){
 			drawMaze(bla);
 			//document.getElementById('out').innerHTML= display(bla); 
-			$("#controls").hide();
+			$("#controls").css('visibility', 'hidden');
 			//alert("YOU WIN!");
 		}
 	}
@@ -324,14 +324,14 @@ $(document).ready(function(){
 	$("#give_up").click(function(){
 		//document.getElementById('out').innerHTML= display(bla); 
 		drawMaze(bla);
-		$("#controls").hide();
+		$("#controls").css('visibility', 'hidden');
 		//alert("You have given up. Please refresh the page to play again");
 		
 	});
 	$("#new_game").click(function(){
 		//document.getElementById('out').innerHTML("");
 		clear_maze();
-		$("#controls").show();
+		$("#controls").css('visibility', 'visible');
 		$("#out").html("");
 		$("#current_maze").text(maze_size+"x"+maze_size);
 		bla = maze(maze_size, maze_size);
