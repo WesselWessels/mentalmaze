@@ -150,6 +150,18 @@ $(document).ready(function(){
 		var y = event.accelerationIncludingGravity.y;  
 		var z = event.accelerationIncludingGravity.z; 
 
+		var cur_threshhold = 8;
+		var other_threshhold = 3;
+
+		if((y < (-1*cur_threshhold)) && (Math.abs(x) < 3) && (Math.abs(z) < 3))
+		{
+			if(direction != 'north'){
+				direction = 'north';
+				get_around();
+				update_movement();
+			}
+		}
+
 		$("#my_debug").html("x: " + x.toFixed(1) + "<br>y: " + y.toFixed(1) + "<br>z: " + z.toFixed(1));
 	}
 
