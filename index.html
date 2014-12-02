@@ -160,8 +160,9 @@ $(document).ready(function(){
 				direction = 'north';
 				get_around();
 				update_movement();
-				orient_can_move = true;
+				
 			}
+			orient_can_move = true;
 		}
 		else if((x < (-1*cur_threshhold)) && (Math.abs(y) < 3) && (Math.abs(z) < 3))
 		{
@@ -169,8 +170,8 @@ $(document).ready(function(){
 				direction = 'west';
 				get_around();
 				update_movement();
-				orient_can_move = true;
 			}
+			orient_can_move = true;
 		}
 		else if((x > (cur_threshhold)) && (Math.abs(y) < 3) && (Math.abs(z) < 3))
 		{
@@ -178,8 +179,8 @@ $(document).ready(function(){
 				direction = 'east';
 				get_around();
 				update_movement();
-				orient_can_move = true;
 			}
+			orient_can_move = true;
 		}
 		else if((y > (cur_threshhold)) && (Math.abs(x) < 3) && (Math.abs(z) < 3))
 		{
@@ -187,8 +188,8 @@ $(document).ready(function(){
 				direction = 'south';
 				get_around();
 				update_movement();
-				orient_can_move = true;
 			}
+			orient_can_move = true;
 		}
 		else if((z < (-1*cur_threshhold)) && (Math.abs(x) < 3) && (Math.abs(y) < 3))
 		{
