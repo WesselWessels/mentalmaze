@@ -55,8 +55,10 @@
 					<button type="button" class="btn btn-primary accelerometer active" value="no">no</button>
 				</div>
 				<div id="the_compass">
+					<button type="button" class="btn btn-primary" id="use_north">Use this as North</button>
 					<span class="compass"></span>
 					<span class="degrees"></span>
+					<span id="my_degrees"></span>
 				</div>
 			</div>
 			<div>
@@ -153,6 +155,9 @@ var visited;
 var orient_can_move = true;
 var use_orient = false;
 var canvas_size = window.innerWidth/3;
+var compass_offset = 0;
+var compass_heading = 0;
+var my_heading = 0;
 if(window.innerWidth <500){
 	canvas_size = window.innerWidth;
 }
@@ -172,8 +177,18 @@ $(document).ready(function(){
 	});
 
 	Compass.watch(function (heading) {
+		compass_heading = heading;
+		my_heading = heading - compass_offset;
+		if(my_heading <0){
+			my_heading = my_heading + 360;
+		}
 	  $('.degrees').text(heading);
 	  $('.compass').css('transform', 'rotate(' + (-heading) + 'deg)');
+	  $("#my_degrees").text(my_heading);
+	});
+
+	$("#use_north").click(function(e){
+		compass_offset = compass_heading;
 	});
 	window.ondevicemotion = function(event) {
 		if(use_orient){
