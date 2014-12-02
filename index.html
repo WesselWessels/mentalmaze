@@ -52,6 +52,15 @@
 
 				</button>
 			</div>
+			<div class="container-fluid" style="text-align:center;" id="enable_accelerometer">
+				<div>
+					Use phone rotation
+				</div>
+				<div class="btn-group">
+					<button type="button" class="btn btn-primary accelerometer" value="yes">yes</button>
+					<button type="button" class="btn btn-primary accelerometer active" value="no">no</button>
+				</div>
+			</div>
 		</div>
 		<div class="row" id="controls" style="text-align:center;">
 			<div class="col-md-2"></div>
@@ -134,6 +143,7 @@ var c;
 var ctx;
 var visited;
 var orient_can_move = true;
+var use_orient = false;
 var canvas_size = window.innerWidth/3;
 if(window.innerWidth <500){
 	canvas_size = window.innerWidth;
@@ -146,62 +156,68 @@ $(document).ready(function(){
 	bla = maze(5,5);
 	get_around();
 
+	if(window.innerWidth > 800){
+		$("#enable_accelerometer").hide();
+	}
+
 	window.ondevicemotion = function(event) {
-		var x = event.accelerationIncludingGravity.x;  
-		var y = event.accelerationIncludingGravity.y;  
-		var z = event.accelerationIncludingGravity.z; 
+		if(use_orient){
+			var x = event.accelerationIncludingGravity.x;  
+			var y = event.accelerationIncludingGravity.y;  
+			var z = event.accelerationIncludingGravity.z; 
 
-		var cur_threshhold = 8;
-		var other_threshhold = 3;
+			var cur_threshhold = 8;
+			var other_threshhold = 3;
 
-		if((y < (-1*cur_threshhold)) && (Math.abs(x) < 3) && (Math.abs(z) < 3))
-		{
-			if(direction != 'north'){
-				direction = 'north';
-				get_around();
-				update_movement();
-				
+			if((y < (-1*cur_threshhold)) && (Math.abs(x) < 3) && (Math.abs(z) < 3))
+			{
+				if(direction != 'north'){
+					direction = 'north';
+					get_around();
+					update_movement();
+					
+				}
+				orient_can_move = true;
 			}
-			orient_can_move = true;
-		}
-		else if((x < (-1*cur_threshhold)) && (Math.abs(y) < 3) && (Math.abs(z) < 3))
-		{
-			if(direction != 'west'){
-				direction = 'west';
-				get_around();
-				update_movement();
+			else if((x < (-1*cur_threshhold)) && (Math.abs(y) < 3) && (Math.abs(z) < 3))
+			{
+				if(direction != 'west'){
+					direction = 'west';
+					get_around();
+					update_movement();
+				}
+				orient_can_move = true;
 			}
-			orient_can_move = true;
-		}
-		else if((x > (cur_threshhold)) && (Math.abs(y) < 3) && (Math.abs(z) < 3))
-		{
-			if(direction != 'east'){
-				direction = 'east';
-				get_around();
-				update_movement();
+			else if((x > (cur_threshhold)) && (Math.abs(y) < 3) && (Math.abs(z) < 3))
+			{
+				if(direction != 'east'){
+					direction = 'east';
+					get_around();
+					update_movement();
+				}
+				orient_can_move = true;
 			}
-			orient_can_move = true;
-		}
-		else if((y > (cur_threshhold)) && (Math.abs(x) < 3) && (Math.abs(z) < 3))
-		{
-			if(direction != 'south'){
-				direction = 'south';
-				get_around();
-				update_movement();
+			else if((y > (cur_threshhold)) && (Math.abs(x) < 3) && (Math.abs(z) < 3))
+			{
+				if(direction != 'south'){
+					direction = 'south';
+					get_around();
+					update_movement();
+				}
+				orient_can_move = true;
 			}
-			orient_can_move = true;
-		}
-		else if((z < (-1*cur_threshhold)) && (Math.abs(x) < 3) && (Math.abs(y) < 3))
-		{
-			if(orient_can_move){
-				press_forward();
-				get_around();
-				update_movement();
-				orient_can_move = false;
+			else if((z < (-1*cur_threshhold)) && (Math.abs(x) < 3) && (Math.abs(y) < 3))
+			{
+				if(orient_can_move){
+					press_forward();
+					get_around();
+					update_movement();
+					orient_can_move = false;
+				}
 			}
-		}
 
-		$("#my_debug").html("x: " + x.toFixed(1) + "<br>y: " + y.toFixed(1) + "<br>z: " + z.toFixed(1));
+			$("#my_debug").html("x: " + x.toFixed(1) + "<br>y: " + y.toFixed(1) + "<br>z: " + z.toFixed(1));
+		}
 	}
 
 	$(document).keydown(function(e){
@@ -247,6 +263,17 @@ $(document).ready(function(){
 		$("#direction").addClass('glyphicon glyphicon-arrow-up');
 		get_around();
 		console.log(maze_size);
+	});
+	$(".accelerometer").click(function(e){
+		$(".accelerometer").removeClass('active');
+		$(this).addClass('active');
+		if($(this).attr('value') == 'yes'){
+			use_orient = true;
+		}
+		else{
+			use_orient = false;
+		}
+
 	});
 	$(".dir_button").click(function(e){
 		e.preventDefault();
