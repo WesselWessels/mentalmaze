@@ -3,6 +3,7 @@
 	<head>
 		<title>Mental Maze</title>
 		<script src="js/jquery-2.1.1.js"></script>
+		<script src="js/compass.js"></script>
 		<link rel="shortcut icon" href="maze.ico">
 		<link rel="stylesheet" href="css/bootstrap.css">
 		<script src="js/bootstrap.js"></script>
@@ -52,6 +53,10 @@
 				<div class="btn-group">
 					<button type="button" class="btn btn-primary accelerometer" value="yes">yes</button>
 					<button type="button" class="btn btn-primary accelerometer active" value="no">no</button>
+				</div>
+				<div id="the_compass">
+					<span class="compass"></span>
+					<span class="degrees"></span>
 				</div>
 			</div>
 			<div>
@@ -162,7 +167,14 @@ $(document).ready(function(){
 	if(window.innerWidth > 800){
 		$("#enable_accelerometer").hide();
 	}
+	Compass.noSupport(function () {
+	  $('#the_compass').hide();
+	});
 
+	Compass.watch(function (heading) {
+	  $('.degrees').text(heading);
+	  $('.compass').css('transform', 'rotate(' + (-heading) + 'deg)');
+	});
 	window.ondevicemotion = function(event) {
 		if(use_orient){
 			var x = event.accelerationIncludingGravity.x;  
