@@ -161,7 +161,30 @@ $(document).ready(function(){
 				update_movement();
 			}
 		}
-
+		else if((x < (-1*cur_threshhold)) && (Math.abs(y) < 3) && (Math.abs(z) < 3))
+		{
+			if(direction != 'west'){
+				direction = 'west';
+				get_around();
+				update_movement();
+			}
+		}
+		else if((x > (cur_threshhold)) && (Math.abs(y) < 3) && (Math.abs(z) < 3))
+		{
+			if(direction != 'east'){
+				direction = 'east';
+				get_around();
+				update_movement();
+			}
+		}
+		else if((y > (cur_threshhold)) && (Math.abs(x) < 3) && (Math.abs(z) < 3))
+		{
+			if(direction != 'south'){
+				direction = 'south';
+				get_around();
+				update_movement();
+			}
+		}
 		$("#my_debug").html("x: " + x.toFixed(1) + "<br>y: " + y.toFixed(1) + "<br>z: " + z.toFixed(1));
 	}
 
