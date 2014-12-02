@@ -150,7 +150,7 @@ $(document).ready(function(){
 		var y = event.accelerationIncludingGravity.y;  
 		var z = event.accelerationIncludingGravity.z; 
 
-		$("#my_debug").text("x: " + x + " y: " + y + " z: " + z);
+		$("#my_debug").html("x: " + x.toFixed(1) + "<br>y: " + y.toFixed(1) + "<br>z: " + z.toFixed(1));
 	}
 
 	$(document).keydown(function(e){
