@@ -117,7 +117,8 @@
 				</div>
 
 		</div>
-
+		<div class="container-fluid" style="text-align:center;" id="my_debug">
+		</div>
 	</body>
 </html>
 <script type="text/javascript">
@@ -143,6 +144,14 @@ $(document).ready(function(){
  	ctx.canvas.height = canvas_size;
 	bla = maze(5,5);
 	get_around();
+
+	window.ondevicemotion = function(event) {
+		var x = event.accelerationIncludingGravity.x;  
+		var y = event.accelerationIncludingGravity.y;  
+		var z = event.accelerationIncludingGravity.z; 
+
+		$("#my_debug").text("x: " + x + " y: " + y + " z: " + z);
+	}
 
 	$(document).keydown(function(e){
 		
