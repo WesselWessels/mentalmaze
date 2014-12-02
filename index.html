@@ -133,6 +133,7 @@ var maze_size = 5;
 var c;
 var ctx;
 var visited;
+var orient_can_move = true;
 var canvas_size = window.innerWidth/3;
 if(window.innerWidth <500){
 	canvas_size = window.innerWidth;
@@ -159,6 +160,7 @@ $(document).ready(function(){
 				direction = 'north';
 				get_around();
 				update_movement();
+				orient_can_move = true;
 			}
 		}
 		else if((x < (-1*cur_threshhold)) && (Math.abs(y) < 3) && (Math.abs(z) < 3))
@@ -167,6 +169,7 @@ $(document).ready(function(){
 				direction = 'west';
 				get_around();
 				update_movement();
+				orient_can_move = true;
 			}
 		}
 		else if((x > (cur_threshhold)) && (Math.abs(y) < 3) && (Math.abs(z) < 3))
@@ -175,6 +178,7 @@ $(document).ready(function(){
 				direction = 'east';
 				get_around();
 				update_movement();
+				orient_can_move = true;
 			}
 		}
 		else if((y > (cur_threshhold)) && (Math.abs(x) < 3) && (Math.abs(z) < 3))
@@ -183,8 +187,19 @@ $(document).ready(function(){
 				direction = 'south';
 				get_around();
 				update_movement();
+				orient_can_move = true;
 			}
 		}
+		else if((z < (-1*cur_threshhold)) && (Math.abs(x) < 3) && (Math.abs(y) < 3))
+		{
+			if(orient_can_move){
+				press_forward();
+				get_around();
+				update_movement();
+				orient_can_move = false;
+			}
+		}
+
 		$("#my_debug").html("x: " + x.toFixed(1) + "<br>y: " + y.toFixed(1) + "<br>z: " + z.toFixed(1));
 	}
 
