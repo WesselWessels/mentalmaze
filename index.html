@@ -177,9 +177,7 @@ $(document).ready(function(){
 		my_heading = heading - compass_offset;
 		my_heading_array[my_heading_index] = my_heading;
 		my_heading_index++;
-		if(my_heading_index >9){
-			my_heading_index = 0;
-		}
+		
 		my_heading_sum = 0;
 		for(var i = 0; i < 10; i++){
 			my_heading_sum = my_heading_sum + my_heading_array[i];
@@ -189,7 +187,10 @@ $(document).ready(function(){
 			my_heading = my_heading + 360;
 		}
 	  $('.degrees').text(heading);
-	  $('#myCanvas').css('transform', 'rotate(' + (-my_heading.toFixed(0)) + 'deg)');
+	  if(my_heading_index >9){
+	  	$('#myCanvas').css('transform', 'rotate(' + (-my_heading.toFixed(0)) + 'deg)');
+			my_heading_index = 0;
+		}
 	  $("#my_degrees").text(my_heading);
 	  if(my_heading <= 45 || my_heading > 315){
 	  	if(direction != 'north'){
