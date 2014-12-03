@@ -176,7 +176,7 @@ $(document).ready(function(){
 			my_heading = my_heading + 360;
 		}
 	  $('.degrees').text(heading);
-	  $('.compass').css('transform', 'rotate(' + (-heading) + 'deg)');
+	  $('#myCanvas').css('transform', 'rotate(' + (-heading) + 'deg)');
 	  $("#my_degrees").text(my_heading);
 	  if(my_heading <= 45 || my_heading > 315){
 	  	if(direction != 'north'){
