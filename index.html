@@ -151,9 +151,9 @@ var canvas_size = window.innerWidth/3;
 var compass_offset = 0;
 var compass_heading = 0;
 var my_heading = 0;
-var my_heading_array = Array(10);
-var my_heading_index = 0;
-var my_heading_sum = 0;
+// var my_heading_array = Array(10);
+// var my_heading_index = 0;
+// var my_heading_sum = 0;
 if(window.innerWidth <500){
 	canvas_size = window.innerWidth;
 }
@@ -175,14 +175,14 @@ $(document).ready(function(){
 	Compass.watch(function (heading) {
 		compass_heading = heading;
 		my_heading = heading - compass_offset;
-		my_heading_array[my_heading_index] = my_heading;
-		my_heading_index++;
+		// my_heading_array[my_heading_index] = my_heading;
+		// my_heading_index++;
 		
-		my_heading_sum = 0;
-		for(var i = 0; i < 10; i++){
-			my_heading_sum = my_heading_sum + my_heading_array[i];
-		}
-		my_heading = my_heading_sum/10;
+		// my_heading_sum = 0;
+		// for(var i = 0; i < 10; i++){
+		// 	my_heading_sum = my_heading_sum + my_heading_array[i];
+		// }
+		// my_heading = my_heading_sum/10;
 		if(my_heading <0){
 			my_heading = my_heading + 360;
 		}
