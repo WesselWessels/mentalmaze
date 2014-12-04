@@ -188,6 +188,7 @@ $(document).ready(function(){
 		}
 	  $('.degrees').text(heading);
 	  // if(my_heading_index >9){
+	  	my_heading = Math.round(my_heading/5)*5;
 	  	$('#myCanvas').css('transform', 'rotate(' + (-my_heading.toFixed(0)) + 'deg)');
 		//	my_heading_index = 0;
 		//}
